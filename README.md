@@ -6,6 +6,7 @@ Yahboom Jetson 机载视觉与 PX4 通信侧的可部署文件归档。
 
 - Ubuntu 22.04 / ROS 2 Humble；
 - AprilTag `tag36h11`，1280×1024 @ 60 FPS；
+- AprilTag `decimate=2.0`，图像订阅只保留最新一帧；
 - `ROS_DOMAIN_ID=99`；
 - Jetson 直连网口 `192.168.1.10/24`；
 - PX4 FMU-v6X `192.168.1.3/24`；
@@ -34,7 +35,8 @@ docs/                            部署、标定和链路验证记录
 `apriltag_ros` 与 `vision_opencv` 源码原仓库当前不可访问，因此没有伪造或替换
 这些源码。部署前需要在 `src/` 中另行提供与 ROS 2 Humble、系统
 `libapriltag` 和 OpenCV 版本兼容的 `apriltag_ros`；必须应用
-`config/apriltag/tags_36h11.yaml` 中的 `sensor_data` QoS 参数。
+`config/apriltag/tags_36h11.yaml` 中的 `sensor_data` QoS 参数，并将图像
+订阅队列显式设为 `keep_last(1)`，防止检测长帧后继续处理过期图像。
 
 详细兼容要求和历史修改说明见
 [`docs/jetson_onboard_rebuild_archive_zh.md`](docs/jetson_onboard_rebuild_archive_zh.md)。

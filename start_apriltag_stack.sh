@@ -56,7 +56,7 @@ pids+=("$!")
 
 /opt/ros/humble/lib/tf2_ros/static_transform_publisher \
     --x 0.010 --y 0.036 --z -0.080 \
-    --qx -0.7071067811865476 --qy 0.0 --qz 0.0 --qw 0.7071067811865476 \
+    --qx -0.5 --qy 0.5 --qz -0.5 --qw 0.5 \
     --frame-id tag1 \
     --child-frame-id target_body_frd &
 pids+=("$!")
