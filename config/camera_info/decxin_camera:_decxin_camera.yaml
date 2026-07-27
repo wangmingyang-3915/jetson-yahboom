@@ -1,0 +1,30 @@
+# Q12-150-10 checkerboard calibration
+# Resolution: 1280x1024; inner corners: 11x8; square size: 0.010 m
+# Calibrated: 2026-07-24; saved samples: 61; robustly accepted views: 53
+# Reprojection RMS: 0.19948 px; maximum accepted per-view RMS: 0.40712 px
+image_width: 1280
+image_height: 1024
+camera_name: usb_camera
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [701.08848, 0.0, 639.75700,
+         0.0, 701.07489, 494.67863,
+         0.0, 0.0, 1.0]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.0194891, -0.0412005, 0.0001929, 0.0002377, 0.0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.0, 0.0, 0.0,
+         0.0, 1.0, 0.0,
+         0.0, 0.0, 1.0]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [691.6428754861, 0.0, 640.2508905641, 0.0,
+         0.0, 700.0901996257, 494.4479699466, 0.0,
+         0.0, 0.0, 1.0, 0.0]

@@ -1,0 +1,23 @@
+[Unit]
+Description=AprilTag ROS 2 vision stack
+Wants=apriltag-performance.service
+After=network.target apriltag-performance.service
+StartLimitIntervalSec=60
+StartLimitBurst=10
+
+[Service]
+Type=simple
+User=jetson
+Group=jetson
+SupplementaryGroups=video
+WorkingDirectory=/home/jetson/yahboom_ws
+Environment=HOME=/home/jetson
+Environment=ROS_DOMAIN_ID=99
+ExecStart=/home/jetson/yahboom_ws/start_apriltag_stack.sh
+Restart=always
+RestartSec=5
+KillMode=control-group
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

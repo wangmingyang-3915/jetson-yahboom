@@ -1,0 +1,13 @@
+[Unit]
+Description=Maximum Jetson clocks for AprilTag vision
+After=nvpmodel.service
+Before=apriltag-stack.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/jetson_clocks
+RemainAfterExit=yes
+TimeoutStartSec=30
+
+[Install]
+WantedBy=multi-user.target
