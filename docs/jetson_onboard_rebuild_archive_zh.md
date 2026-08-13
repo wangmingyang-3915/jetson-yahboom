@@ -101,6 +101,12 @@ pose：pnp
 - 生产态 60 秒实测中，检测最大间隔约 52 ms，ID 1 命中率 100%；
 - 检测样本年龄平均约 40.3 ms，P95 约 42.8 ms，最大约 46.6 ms；
 - 相对位姿约 59.7 Hz，有效率 100%；
+- 平面 PnP 改为 IPPE 双解连续选解后，静态 20 秒测试的滚转范围由
+  12.22° 降到 1.98°，单帧滚转跳变由 11.82° 降到 1.78°，虚假 Z
+  位移范围由 13.5 cm 降到 2.2 cm；
+- 两机调平、静止且机体轴平行时，用 1801 个全有效相对姿态样本标定固定安装
+  零偏；补偿前平均 RPY 为 `[-4.181°, -0.906°, 0.947°]`，补偿后 1671
+  个全有效样本的平均残差为 `[-0.009°, -0.005°, 0.045°]`；
 - 测试时 CPU 温度约 50°C、六核 1.728 GHz，无热降频，整机功耗约 10 W。
 
 这些数值是特定画面、散热、供电和 Jetson 状态下的历史测量值，新机器验收时允许有差异。
@@ -296,7 +302,14 @@ source /home/jetson/yahboom_ws/install/setup.bash
    - 检测偶发长耗时后直接处理最新帧；
    - 不再继续追赶已经过时的缓存图像；
    - 不要用额外的 1280×1024@60 原始图像订阅器做长期性能监控，否则诊断器本身会增加传输负载。
-6. Release 构建。
+6. 平面位姿解算使用 OpenCV IPPE 双解和时间连续性选解：
+   - `/image_raw` 角点使用 `CameraInfo.K` 和真实畸变系数 `D`，不再错误地使用
+     矫正投影矩阵 `P` 加空畸变；
+   - `SOLVEPNP_IPPE` 同时生成两个平面候选解；
+   - 过滤负深度解，并结合重投影误差和最近 500 ms 内上一帧四元数选择连续解支；
+   - 保持原有 `tag1` 坐标轴定义和四元数符号连续性；
+   - 不直接滤波欧拉角，避免掩盖平面 PnP 翻转。
+7. Release 构建。
 
 历史备份：
 
@@ -477,15 +490,30 @@ quaternion xyzw = [0.000000, 0.7071067811865476,
 ### 9.2 靶标机体外参
 
 物理安装关系：标签中心在目标机中心后方 1.0 cm、左侧 8.0 cm、上方
-3.6 cm，标签正面水平向左。对应 `target_body_frd -> tag1` 的旋转四元数
-`xyzw = [0.7071067811865476, 0, 0, 0.7071067811865476]`。
+3.6 cm，标签正面水平向左。理想轴向关系不能包含支架、打印面和机体调平的
+小角度误差，因此最终运行值还合并了相对位姿零姿态标定补偿。
 
 因为 `apriltag_ros` 已发布 `camera_link -> tag1`，为保持 TF 单父树，实际发布逆向静态变换：
 
 ```text
 tag1 -> target_body_frd
 translation xyz = [0.010, 0.036, -0.080] m
-quaternion xyzw = [-0.7071067811865476, 0, 0, 0.7071067811865476]
+quaternion xyzw = [-0.517953951607758, 0.517723702335759,
+                   -0.473344004169779, 0.489521527381772]
+```
+
+该四元数由理想轴向四元数 `[-0.5, 0.5, -0.5, 0.5]` 右乘零姿态下
+`target_body_frd -> body_frd` 的 30 秒平均四元数得到。标定条件和结果：
+
+```text
+有效样本：1801，无效样本：0
+补偿前平均 RPY：[-4.180515, -0.906184, 0.947433] deg
+补偿前平均四元数 wxyz：
+[0.999271592748, -0.036406061196, -0.008203886242, 0.007973636970]
+
+补偿后有效样本：1671，无效样本：0
+补偿后平均 RPY：[-0.009043, -0.005499, 0.045016] deg
+平均角误差：0.528 deg，最大角误差：1.707 deg
 ```
 
 最终 TF 树：
@@ -569,7 +597,8 @@ pids+=("$!")
 
 /opt/ros/humble/lib/tf2_ros/static_transform_publisher \
     --x 0.010 --y 0.036 --z -0.080 \
-    --qx -0.5 --qy 0.5 --qz -0.5 --qw 0.5 \
+    --qx -0.517953951607758 --qy 0.517723702335759 \
+    --qz -0.473344004169779 --qw 0.489521527381772 \
     --frame-id tag1 \
     --child-frame-id target_body_frd &
 pids+=("$!")
@@ -1036,6 +1065,7 @@ start_xrce_agent_ethernet.sh
   ROS Humble/libapriltag 3.2 兼容修改
   CameraInfo C++ 缓存优化
   图像订阅 keep_last(1) 最新帧队列
+  原始图像 K/D + IPPE 双解连续选解
   cfg/tags_36h11.yaml 的 sensor_data QoS 和 decimate=2.0
 
 /home/jetson/yahboom_ws/src/px4_msgs/
@@ -1073,7 +1103,11 @@ zh_CN.UTF-8                      中文界面
 /home/jetson/yahboom_ws/src/apriltag_ros/cfg/tags_36h11.yaml.before_sensor_data_qos_20260724
 /home/jetson/yahboom_ws/src/apriltag_ros/src/AprilTagNode.cpp.before_dropout_fix_20260727
 /home/jetson/yahboom_ws/src/apriltag_ros/cfg/tags_36h11.yaml.before_dropout_fix_20260727
+/home/jetson/yahboom_ws/src/apriltag_ros/src/AprilTagNode.cpp.before_ippe_fix_20260727
+/home/jetson/yahboom_ws/src/apriltag_ros/src/pose_estimation.cpp.before_ippe_fix_20260727
+/home/jetson/yahboom_ws/src/apriltag_ros/src/pose_estimation.hpp.before_ippe_fix_20260727
 /home/jetson/yahboom_ws/start_apriltag_stack.sh.before_target_rotation_fix_20260727
+/home/jetson/yahboom_ws/start_apriltag_stack.sh.before_relative_orientation_calibration_20260727
 /etc/systemd/system/apriltag-stack.service.pre_max_clocks
 ```
 
