@@ -18,6 +18,7 @@ Yahboom Jetson 机载视觉与 PX4 通信侧的可部署文件归档。
 
 ```text
 src/px4_msgs/                    与当前 PX4 固件匹配的完整消息包
+src/apriltag_ros/                实机使用的 AprilTag 检测包及低延迟/IPPE 连续选解修改
 src/target_relative_pose_bridge/ AprilTag TF 到 PX4 相对位姿的 ROS 2 桥
 config/apriltag/                 AprilTag 检测参数
 config/camera_info/              1280×1024 相机标定
@@ -31,12 +32,10 @@ docs/                            部署、标定和链路验证记录
 
 ## 重要边界
 
-本仓库包含当前 PX4 配套的 ROS 2 包和最终机载配置，但历史上修改过的
-`apriltag_ros` 与 `vision_opencv` 源码原仓库当前不可访问，因此没有伪造或替换
-这些源码。部署前需要在 `src/` 中另行提供与 ROS 2 Humble、系统
-`libapriltag` 和 OpenCV 版本兼容的 `apriltag_ros`；必须应用
-`config/apriltag/tags_36h11.yaml` 中的 `sensor_data` QoS 参数，并将图像
-订阅队列显式设为 `keep_last(1)`，防止检测长帧后继续处理过期图像。
+本仓库包含当前 PX4 配套的 ROS 2 包、实机使用的 `apriltag_ros` 和最终机载配置。
+其中 `apriltag_ros` 已包含 `sensor_data` QoS、图像队列 `keep_last(1)`、原始相机
+畸变参数参与 PnP，以及 IPPE 双解连续选解修改。`vision_opencv` 源码仍未纳入仓库；
+若系统同时存在多个 OpenCV ABI，需要按部署文档提供兼容的 `cv_bridge` overlay。
 
 详细兼容要求和历史修改说明见
 [`docs/jetson_onboard_rebuild_archive_zh.md`](docs/jetson_onboard_rebuild_archive_zh.md)。

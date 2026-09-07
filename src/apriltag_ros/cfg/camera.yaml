@@ -1,0 +1,30 @@
+# GP100-6-12x9 checkerboard calibration
+# Resolution: 1280x1024; inner corners: 11x8; square size: 0.006 m
+# Calibrated: 2026-07-16; accepted samples: 94
+image_width: 1280
+image_height: 1024
+camera_name: usb_camera
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [696.1112012895918, 0.0, 634.300676753246,
+         0.0, 696.0345173732154, 493.3564672098498,
+         0.0, 0.0, 1.0]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.0104725547995041, -0.031143191069776567,
+         -0.00024072423266828256, -0.00014324288582509057, 0.0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.0, 0.0, 0.0,
+         0.0, 1.0, 0.0,
+         0.0, 0.0, 1.0]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [686.0283546848162, 0.0, 633.5848386449876, 0.0,
+         0.0, 693.4832700714388, 492.5997572946576, 0.0,
+         0.0, 0.0, 1.0, 0.0]
