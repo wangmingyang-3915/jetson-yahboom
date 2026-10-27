@@ -1,0 +1,29 @@
+# 当前相机分辨率：1280 x 1024
+# fx/fy/cx/cy 来自《AprilTag识别与相机标定操作流程.md》记录的原始内参。
+# 原文未提供畸变系数，因此这里暂以零值占位；正式使用前必须按流程重新标定并验收。
+image_width: 1280
+image_height: 1024
+camera_name: usb_camera
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [691.7257, 0.0, 637.35477,
+         0.0, 690.97546, 487.97975,
+         0.0, 0.0, 1.0]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.0, 0.0, 0.0, 0.0, 0.0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.0, 0.0, 0.0,
+         0.0, 1.0, 0.0,
+         0.0, 0.0, 1.0]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [691.7257, 0.0, 637.35477, 0.0,
+         0.0, 690.97546, 487.97975, 0.0,
+         0.0, 0.0, 1.0, 0.0]

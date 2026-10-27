@@ -1,0 +1,302 @@
+{
+  "method": "Re-detect full-resolution corners and solve per-view extrinsics with saved K,D; post-calibration reprojection check, not independent validation",
+  "saved_images": 68,
+  "validated_images": 66,
+  "failed_images": [
+    "left-0000.png",
+    "left-0067.png"
+  ],
+  "rms_px": 0.27693151389225684,
+  "median_view_rms_px": 0.23533350229263306,
+  "max_view_rms_px": 0.74094557762146,
+  "views": [
+    {
+      "image": "left-0001.png",
+      "rms_px": 0.24786053597927094
+    },
+    {
+      "image": "left-0002.png",
+      "rms_px": 0.2446829080581665
+    },
+    {
+      "image": "left-0003.png",
+      "rms_px": 0.201664537191391
+    },
+    {
+      "image": "left-0004.png",
+      "rms_px": 0.19569118320941925
+    },
+    {
+      "image": "left-0005.png",
+      "rms_px": 0.229763463139534
+    },
+    {
+      "image": "left-0006.png",
+      "rms_px": 0.25352707505226135
+    },
+    {
+      "image": "left-0007.png",
+      "rms_px": 0.4024740159511566
+    },
+    {
+      "image": "left-0008.png",
+      "rms_px": 0.6101252436637878
+    },
+    {
+      "image": "left-0009.png",
+      "rms_px": 0.2784942090511322
+    },
+    {
+      "image": "left-0010.png",
+      "rms_px": 0.25402840971946716
+    },
+    {
+      "image": "left-0011.png",
+      "rms_px": 0.2366061806678772
+    },
+    {
+      "image": "left-0012.png",
+      "rms_px": 0.30616295337677
+    },
+    {
+      "image": "left-0013.png",
+      "rms_px": 0.25687703490257263
+    },
+    {
+      "image": "left-0014.png",
+      "rms_px": 0.23853299021720886
+    },
+    {
+      "image": "left-0015.png",
+      "rms_px": 0.23054678738117218
+    },
+    {
+      "image": "left-0016.png",
+      "rms_px": 0.2542710304260254
+    },
+    {
+      "image": "left-0017.png",
+      "rms_px": 0.22582247853279114
+    },
+    {
+      "image": "left-0018.png",
+      "rms_px": 0.17566783726215363
+    },
+    {
+      "image": "left-0019.png",
+      "rms_px": 0.2566867172718048
+    },
+    {
+      "image": "left-0020.png",
+      "rms_px": 0.25442439317703247
+    },
+    {
+      "image": "left-0021.png",
+      "rms_px": 0.24089214205741882
+    },
+    {
+      "image": "left-0022.png",
+      "rms_px": 0.23050537705421448
+    },
+    {
+      "image": "left-0023.png",
+      "rms_px": 0.2324933558702469
+    },
+    {
+      "image": "left-0024.png",
+      "rms_px": 0.23086555302143097
+    },
+    {
+      "image": "left-0025.png",
+      "rms_px": 0.21689340472221375
+    },
+    {
+      "image": "left-0026.png",
+      "rms_px": 0.21540024876594543
+    },
+    {
+      "image": "left-0027.png",
+      "rms_px": 0.2202005684375763
+    },
+    {
+      "image": "left-0028.png",
+      "rms_px": 0.20788878202438354
+    },
+    {
+      "image": "left-0029.png",
+      "rms_px": 0.20053447782993317
+    },
+    {
+      "image": "left-0030.png",
+      "rms_px": 0.1802624762058258
+    },
+    {
+      "image": "left-0031.png",
+      "rms_px": 0.16719244420528412
+    },
+    {
+      "image": "left-0032.png",
+      "rms_px": 0.17578135430812836
+    },
+    {
+      "image": "left-0033.png",
+      "rms_px": 0.14964710175991058
+    },
+    {
+      "image": "left-0034.png",
+      "rms_px": 0.15172375738620758
+    },
+    {
+      "image": "left-0035.png",
+      "rms_px": 0.16144295036792755
+    },
+    {
+      "image": "left-0036.png",
+      "rms_px": 0.13778923451900482
+    },
+    {
+      "image": "left-0037.png",
+      "rms_px": 0.1426694244146347
+    },
+    {
+      "image": "left-0038.png",
+      "rms_px": 0.14377596974372864
+    },
+    {
+      "image": "left-0039.png",
+      "rms_px": 0.14914225041866302
+    },
+    {
+      "image": "left-0040.png",
+      "rms_px": 0.2160787135362625
+    },
+    {
+      "image": "left-0041.png",
+      "rms_px": 0.2601162791252136
+    },
+    {
+      "image": "left-0042.png",
+      "rms_px": 0.13834421336650848
+    },
+    {
+      "image": "left-0043.png",
+      "rms_px": 0.19600771367549896
+    },
+    {
+      "image": "left-0044.png",
+      "rms_px": 0.22106175124645233
+    },
+    {
+      "image": "left-0045.png",
+      "rms_px": 0.15011610090732574
+    },
+    {
+      "image": "left-0046.png",
+      "rms_px": 0.23582884669303894
+    },
+    {
+      "image": "left-0047.png",
+      "rms_px": 0.26716017723083496
+    },
+    {
+      "image": "left-0048.png",
+      "rms_px": 0.19582511484622955
+    },
+    {
+      "image": "left-0049.png",
+      "rms_px": 0.2744896411895752
+    },
+    {
+      "image": "left-0050.png",
+      "rms_px": 0.23483815789222717
+    },
+    {
+      "image": "left-0051.png",
+      "rms_px": 0.24588343501091003
+    },
+    {
+      "image": "left-0052.png",
+      "rms_px": 0.4049302041530609
+    },
+    {
+      "image": "left-0053.png",
+      "rms_px": 0.6006532907485962
+    },
+    {
+      "image": "left-0054.png",
+      "rms_px": 0.591905415058136
+    },
+    {
+      "image": "left-0055.png",
+      "rms_px": 0.35503965616226196
+    },
+    {
+      "image": "left-0056.png",
+      "rms_px": 0.26669490337371826
+    },
+    {
+      "image": "left-0057.png",
+      "rms_px": 0.14122812449932098
+    },
+    {
+      "image": "left-0058.png",
+      "rms_px": 0.30409911274909973
+    },
+    {
+      "image": "left-0059.png",
+      "rms_px": 0.285688191652298
+    },
+    {
+      "image": "left-0060.png",
+      "rms_px": 0.10165107250213623
+    },
+    {
+      "image": "left-0061.png",
+      "rms_px": 0.306857705116272
+    },
+    {
+      "image": "left-0062.png",
+      "rms_px": 0.74094557762146
+    },
+    {
+      "image": "left-0063.png",
+      "rms_px": 0.2644389569759369
+    },
+    {
+      "image": "left-0064.png",
+      "rms_px": 0.2493482232093811
+    },
+    {
+      "image": "left-0065.png",
+      "rms_px": 0.244521826505661
+    },
+    {
+      "image": "left-0066.png",
+      "rms_px": 0.2545526623725891
+    }
+  ],
+  "K": [
+    [
+      689.15091,
+      0.0,
+      637.5534
+    ],
+    [
+      0.0,
+      689.19498,
+      494.45791
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "D": [
+    0.008525,
+    -0.026792,
+    -0.000677,
+    0.000218,
+    0.0
+  ]
+}

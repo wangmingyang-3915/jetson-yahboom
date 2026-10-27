@@ -16,3 +16,13 @@ __pycache__/
 .idea/
 .vscode/
 .DS_Store
+
+# Generated dashboard relay artifacts and local backup copies
+vision_dashboard/relay_build*/
+vision_dashboard/relay_install*/
+vision_dashboard/relay_log*/
+*.bak_*
+.env
+.env.*
+*.pem
+*.key

@@ -1,0 +1,5 @@
+Board: Q12-150-10
+Inner corners: 11x8
+Square: 0.010 m
+Resolution: 1280x1024
+Image topic: /image_raw

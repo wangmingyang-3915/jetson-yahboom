@@ -59,7 +59,7 @@ pids+=("$!")
 
 /opt/ros/humble/lib/tf2_ros/static_transform_publisher \
     --x 0.010 --y 0.036 --z -0.080 \
-    --qx -0.509742963809257 --qy 0.510702549407070 --qz -0.488625888120183 --qw 0.490499498812014 \
+    --qx -0.4876832650038729 --qy 0.4878392943378241 --qz -0.5156137271558183 --qw 0.5082522408249879 \
     --frame-id tag0 \
     --child-frame-id target_body_frd_0 &
 pids+=("$!")
@@ -77,6 +77,14 @@ pids+=("$!")
     --frame-id tag2 \
     --child-frame-id target_body_frd_2 &
 pids+=("$!")
+
+# Restore the software controls captured after the manual lens adjustment.
+# Physical focus is set on the lens; calibration intrinsics require recalibration.
+camera_controls_file=/home/jetson/yahboom_ws/camera_controls.conf
+if [[ -r "$camera_controls_file" ]]; then
+    camera_controls=$(cat "$camera_controls_file")
+    v4l2-ctl --device="$camera_device" --set-ctrl="$camera_controls"
+fi
 
 # Jetson 硬件 MJPEG 解码，并直接输出 AprilTag 所需的单通道灰度图。
 gscam_pipeline="v4l2src device=${camera_device} io-mode=2 do-timestamp=true ! image/jpeg,width=1280,height=1024,framerate=60/1 ! nvjpegdec ! nvvidconv ! video/x-raw(memory:NVMM),format=I420 ! nvvidconv ! video/x-raw,format=GRAY8"

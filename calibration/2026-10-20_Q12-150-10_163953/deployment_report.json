@@ -1,0 +1,25 @@
+{
+  "deployed_at": "2026-10-20T16:46:34",
+  "service": "/set_camera_info",
+  "active_file": "/home/jetson/.ros/camera_info/decxin_camera:_decxin_camera.yaml",
+  "workspace_file": "/home/jetson/yahboom_ws/config/camera_info/decxin_camera.yaml",
+  "live_camera_info_verified": true,
+  "K": [
+    689.15091,
+    0.0,
+    637.5534,
+    0.0,
+    689.19498,
+    494.45791,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "D": [
+    0.008525,
+    -0.026792,
+    -0.000677,
+    0.000218,
+    0.0
+  ]
+}
